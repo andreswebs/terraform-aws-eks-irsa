@@ -5,7 +5,7 @@ output "k8s_sa_name" {
 
 output "k8s_sa_namespace" {
   value       = var.k8s_sa_namespace
-  description = "Namespace of the Kubernetes namespace"
+  description = "Namespace of the Kubernetes service account"
 }
 
 output "oidc_provider" {
