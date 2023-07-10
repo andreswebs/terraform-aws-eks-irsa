@@ -7,7 +7,7 @@ locals {
   partition     = data.aws_partition.current.partition
 }
 
-data "aws_iam_policy_document" "this" {
+data "aws_iam_policy_document" "default" {
 
   statement {
 
@@ -31,6 +31,13 @@ data "aws_iam_policy_document" "this" {
     }
 
   }
+}
+
+data "aws_iam_policy_document" "this" {
+  source_policy_documents = concat(
+    [data.aws_iam_policy_document.default.json],
+    var.assume_role_extra_docs
+  )
 }
 
 resource "aws_iam_role" "this" {

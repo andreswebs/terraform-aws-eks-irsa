@@ -68,3 +68,9 @@ variable "max_session_duration" {
   type        = number
   default     = null
 }
+
+variable "assume_role_extra_docs" {
+  description = "(Optional) Extra IAM policy documents in JSON format, to be merged with the default"
+  type        = list(string)
+  default     = []
+}
