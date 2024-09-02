@@ -5,6 +5,7 @@ locals {
   oidc_provider = replace(var.cluster_oidc_provider, "https://", "")
   account_id    = data.aws_caller_identity.current.account_id
   partition     = data.aws_partition.current.partition
+  dns_suffix    = data.aws_partition.current.dns_suffix
 }
 
 data "aws_iam_policy_document" "default" {
@@ -27,7 +28,7 @@ data "aws_iam_policy_document" "default" {
     condition {
       test     = "StringEquals"
       variable = "${local.oidc_provider}:aud"
-      values   = ["sts.amazonaws.com"]
+      values   = ["sts.${local.dns_suffix}"]
     }
 
   }
